@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecossistema de Alta Performance - Transformando Vidas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at 20% 80%, #120078 0%, #9f1239 50%, #7c3aed 100%);
+            overflow-x: hidden;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.98);
+            margin: 5px 0;
+            border-radius: 0;
+            opacity: 0;
+            animation: slideReveal 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        @keyframes slideReveal {
+            from { 
+                opacity: 0; 
+                transform: translateY(60px) scale(0.95);
+                filter: blur(10px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+        
+        .slide:nth-child(1) { animation-delay: 0.3s; }
+        .slide:nth-child(2) { animation-delay: 0.5s; }
+        .slide:nth-child(3) { animation-delay: 0.7s; }
+        
+        h1 {
+            font-size: 4.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 35px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        
+        h2 {
+            font-size: 3rem;
+            color: #1e293b;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        h3 {
+            font-size: 1.9rem;
+            color: #334155;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            font-size: 1.6rem;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 45px;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        .hero-text {
+            font-size: 1.7rem;
+            line-height: 1.7;
+            text-align: center;
+            max-width: 1000px;
+            margin-bottom: 45px;
+            color: #1e293b;
+            font-weight: 400;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            display: inline-block;
+            margin: 8px 5px;
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+        }
+        
+        .highlight:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4);
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            margin: 45px 0;
+            max-width: 1300px;
+        }
+        
+        .problem-card {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 40px 35px;
+            border-radius: 25px;
+            text-align: center;
+            transform: translateY(0);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(220, 38, 38, 0.3);
+        }
+        
+        .problem-card:hover::before {
+            left: 100%;
+        }
+        
+        .pillars-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+            max-width: 1500px;
+        }
+        
+        .pillar {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 35px 30px;
+            border-radius: 25px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+        
+        .pillar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .pillar:hover {
+            transform: translateY(-12px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(59, 130, 246, 0.4);
+            border-color: rgba(255,255,255,0.2);
+        }
+        
+        .pillar:hover::before {
+            opacity: 1;
+        }
+        
+        .pillar > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .pillar-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+            max-width: 1300px;
+        }
+        
+        .benefit-card {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 35px 30px;
+            border-radius: 25px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefit-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transition: all 0.4s ease;
+            transform: translate(-50%, -50%);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);
+        }
+        
+        .benefit-card:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+            padding: 45px 35px;
+            border-radius: 25px;
+            margin: 50px 0;
+            max-width: 1100px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .stat {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat:hover {
+            transform: scale(1.1);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #dc2626, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #7c3aed, #a855f7, #c084fc);
+            color: white;
+            padding: 70px 50px;
+            border-radius: 30px;
+            text-align: center;
+            margin: 50px 0;
+            max-width: 900px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .cta-section > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
+            border: none;
+            padding: 25px 50px;
+            font-size: 1.4rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 700;
+            margin: 25px 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(236, 72, 153, 0.4);
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .partnership-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .partner-box {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            padding: 40px 35px;
+            border-radius: 25px;
+            text-align: center;
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .partner-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(251, 191, 36, 0.3);
+        }
+        
+        .plus-sign {
+            font-size: 4rem;
+            color: #6366f1;
+            font-weight: 800;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .navigation {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: rgba(99, 102, 241, 0.9);
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-btn:hover {
+            background: rgba(99, 102, 241, 1);
+            transform: translateX(-5px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+        
+        .impact-quote {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
+            border-left: 6px solid #10b981;
+            padding: 35px 40px;
+            margin: 40px 0;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.4rem;
+            color: #1e293b;
+            backdrop-filter: blur(5px);
+        }
+        
+        .feature-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+            max-width: 1200px;
+        }
+        
+        .feature-item {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-item:hover {
+            border-color: #6366f1;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2.2rem; }
+            .hero-text { font-size: 1.4rem; }
+            .slide { padding: 25px; }
+            .navigation { 
+                position: relative; 
+                top: auto; 
+                right: auto; 
+                margin: 20px 0;
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <button class="nav-btn" onclick="scrollToSlide(0)">🏠 Início</button>
+        <button class="nav-btn" onclick="scrollToSlide(1)">⚡ Problema</button>
+        <button class="nav-btn" onclick="scrollToSlide(2)">🚀 Solução</button>
+        <button class="nav-btn" onclick="scrollToSlide(3)">🏛️ Pilares</button>
+        <button class="nav-btn" onclick="scrollToSlide(4)">💎 Valor</button>
+        <button class="nav-btn" onclick="scrollToSlide(5)">🤝 Parceria</button>
+        <button class="nav-btn" onclick="scrollToSlide(6)">🎯 Ação</button>
+    </div>
+
+    <!-- SLIDE 1: ABERTURA REVOLUCIONÁRIA -->
+    <div class="slide">
+        <h1>🚀 TRANSFORMANDO O FUTURO DOS CONCURSEIROS</h1>
+        <p class="subtitle">Um Ecossistema Completo de Alta Performance que Vai Além dos Estudos</p>
+        
+        <div class="hero-text">
+            <strong>InfoWay</strong>, vocês têm algo extraordinário: a confiança de milhares de futuros servidores públicos.<br><br>
+            
+            Imaginem se pudéssemos <span class="highlight">DOBRAR a taxa de aprovação</span> dos seus alunos, 
+            <span class="highlight">REDUZIR o tempo médio de estudo</span> e ainda por cima criar 
+            <span class="highlight">concurseiros mais felizes e equilibrados</span>.<br><br>
+            
+            Descobrimos uma revolução que pode transformar a InfoWay na <span class="highlight">referência absoluta em desenvolvimento humano</span> para concursos públicos.
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-number">2x</span>
+                <span class="stat-label">Taxa de Aprovação</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">50%</span>
+                <span class="stat-label">Menos Tempo de Estudo</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">95%</span>
+                <span class="stat-label">Satisfação dos Alunos</span>
+            </div>
+        </div>
+        
+        <div class="impact-quote">
+            "Não se trata apenas de passar em concursos. Se trata de criar seres humanos de alta performance que vão transformar o serviço público brasileiro."
+        </div>
+    </div>
+
+    <!-- SLIDE 2: A REALIDADE QUE PRECISAMOS MUDAR -->
+    <div class="slide">
+        <h2>💔 A REALIDADE QUE PRECISA SER TRANSFORMADA</h2>
+        
+        <div class="problem-grid">
+            <div class="problem-card">
+                <h3>⏳ JORNADA INTERMINÁVEL</h3>
+                <p>Concurseiros levam em média <strong>3-5 anos</strong> para conseguir aprovação, criando uma rotina insustentável</p>
+            </div>
+            
+            <div class="problem-card">
+                <h3>🚪 DESISTÊNCIA MASSIVA</h3>
+                <p><strong>65% desistem no primeiro ano</strong> por não conseguirem manter constância e motivação</p>
+            </div>
+            
+            <div class="problem-card">
+                <h3>😰 CRISE DE SAÚDE MENTAL</h3>
+                <p>Ansiedade, depressão e burnout são <strong>epidêmicos</strong> entre concurseiros</p>
+            </div>
+            
+            <div class="problem-card">
+                <h3>📚 MÉTODO ULTRAPASSADO</h3>
+                <p>Ensino focado apenas em <strong>conteúdo</strong>, ignorando neurociência, psicologia e bem-estar</p>
+            </div>
+            
+            <div class="problem-card">
+                <h3>🔄 CICLO VICIOSO</h3>
+                <p>Estudam muito, aprendem pouco, esquecem rápido e <strong>se frustram constantemente</strong></p>
+            </div>
+            
+            <div class="problem-card">
+                <h3>🏝️ ISOLAMENTO TOTAL</h3>
+                <p>Jornada solitária sem <strong>suporte emocional</strong> e acompanhamento personalizado</p>
+            </div>
+        </div>
+        
+        <div class="hero-text" style="margin-top: 40px;">
+            <span class="highlight">O PROBLEMA REAL:</span><br>
+            O mercado ensina <strong>MATÉRIAS</strong>, mas não ensina como <strong>VIVER</strong> a vida de concurseiro de forma saudável e eficiente.<br><br>
+            É como ensinar alguém a dirigir apenas mostrando o motor do carro.
+        </div>
+    </div>
+
+    <!-- SLIDE 3: A REVOLUÇÃO -->
+    <div class="slide">
+        <h2>⚡ NOSSA REVOLUÇÃO: ECOSSISTEMA COMPLETO DE ALTA PERFORMANCE</h2>
+        <p class="subtitle">Transformamos concurseiros em máquinas de aprendizado equilibradas e felizes</p>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <h3>🧠 CIÊNCIA APLICADA</h3>
+                <p>Neurociência da aprendizagem, psicologia cognitiva e técnicas de alta performance</p>
+            </div>
+            
+            <div class="benefit-card">
+                <h3>🏠 AMBIENTE TRANSFORMADOR</h3>
+                <p>Comunidade ativa, suporte 24/7, networking com aprovados e mentorias exclusivas</p>
+            </div>
+            
+            <div class="benefit-card">
+                <h3>💪 VIDA EQUILIBRADA</h3>
+                <p>Saúde mental, física, sono otimizado, alimentação e exercícios para performance</p>
+            </div>
+            
+            <div class="benefit-card">
+                <h3>🎯 RESULTADOS ACELERADOS</h3>
+                <p>Metodologia que acelera aprendizado, melhora retenção e reduz tempo de estudo</p>
+            </div>
+        </div>
+        
+        <div class="feature-showcase">
+            <div class="feature-item">
+                <h4>📚 Trilhas Estruturadas</h4>
+                <p>Passo a passo científico para otimizar estudos</p>
+            </div>
+            <div class="feature-item">
+                <h4>👥 Comunidade Viva</h4>
+                <p>Clube do livro, desafios e networking</p>
+            </div>
+            <div class="feature-item">
+                <h4>🎤 Mentoria Personalizada</h4>
+                <p>Acompanhamento individual ao vivo</p>
+            </div>
+            <div class="feature-item">
+                <h4>🎁 Cursos Bônus</h4>
+                <p>Dezenas de especializações incluídas</p>
+            </div>
+        </div>
+        
+        <div class="impact-quote">
+            "Criamos o primeiro ambiente que cuida do CONCURSEIRO como pessoa, não apenas como um cérebro que precisa decorar leis."
+        </div>
+    </div>
+
+    <!-- SLIDE 4: OS 5 PILARES CIENTÍFICOS -->
+    <div class="slide">
+        <h2>🏛️ OS 5 PILARES QUE MUDAM TUDO</h2>
+        <p class="subtitle">Metodologia científica que transforma a vida dos concurseiros</p>
+        
+        <div class="pillars-container">
+            <div class="pillar">
+                <span class="pillar-icon">🧠</span>
+                <h3>APRENDIZAGEM OTIMIZADA</h3>
+                <p><strong>Como aprender a aprender:</strong> Neurociência aplicada, técnicas de memorização avançada, sistema de revisões inteligentes, mapas mentais científicos</p>
+            </div>
+            
+            <div class="pillar">
+                <span class="pillar-icon">🎯</span>
+                <h3>MINDSET & MOTIVAÇÃO</h3>
+                <p><strong>Mente de campeão:</strong> Psicologia da aprovação, autoconhecimento profundo, gestão emocional, competências socioemocionais</p>
+            </div>
+            
+            <div class="pillar">
+                <span class="pillar-icon">🏠</span>
+                <h3>AMBIENTE & HÁBITOS</h3>
+                <p><strong>Rotinas vencedoras:</strong> Design do ambiente perfeito, criação de sistemas, organização avançada, quebra de paradigmas limitantes</p>
+            </div>
+            
+            <div class="pillar">
+                <span class="pillar-icon">💪</span>
+                <h3>SAÚDE & ENERGIA</h3>
+                <p><strong>Corpo e mente otimizados:</strong> Sono para performance, exercícios para o cérebro, alimentação funcional, gestão de vícios</p>
+            </div>
+            
+            <div class="pillar">
+                <span class="pillar-icon">📈</span>
+                <h3>CONSTÂNCIA & EVOLUÇÃO</h3>
+                <p><strong>Crescimento contínuo:</strong> Sistemas de acompanhamento, métricas personalizadas, adaptação de estratégias, mentalidade evolutiva</p>
+            </div>
+        </div>
+        
+        <div class="hero-text">
+            Cada pilar é uma <span class="highlight">especialização completa</span> com trilhas estruturadas, 
+            <span class="highlight">cursos bônus exclusivos</span> e <span class="highlight">mentoria personalizada</span>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: VALOR ÚNICO PARA INFOWAY -->
+    <div class="slide">
+        <h2>💎 POR QUE ISSO É OURO PARA A INFOWAY</h2>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <h3>🌊 OCEANO AZUL</h3>
+                <p>Categoria completamente inexplorada - vocês serão os pioneiros absolutos</p>
+            </div>
+            
+            <div class="benefit-card">
+                <h3>👑 LIDERANÇA ABSOLUTA</h3>
+                <p>InfoWay vira a referência mundial em desenvolvimento humano para concursos</p>
+            </div>
+            
+            <div class="benefit-card">
+                <h3>❤️ FIDELIDADE EXTREMA</h3>
+                <p>Alunos transformados viram evangelistas da marca por toda a vida</p>
+            </div>
+            
+            <div class="benefit-card">
+                <h3>🚀 DIFERENCIAÇÃO TOTAL</h3>
+                <p>Impossível de ser copiado - é transformação genuína, não apenas conteúdo</p>
+            </div>
+        </div>
+        
+        <div class="impact-quote">
+            "Enquanto a concorrência vende aulas, a InfoWay vai vender TRANSFORMAÇÃO DE VIDA. Isso é impagável."
+        </div>
+        
+        <div class="hero-text">
+            <span class="highlight">POSICIONAMENTO ÚNICO:</span><br>
+            "InfoWay - Onde concurseiros se transformam em pessoas de alta performance que mudam o Brasil"<br><br>
+            
+            Vocês não vão ser apenas <strong>lembrados</strong> pelos alunos.<br>
+            Vocês vão ser <strong>amados</strong> por eles.
+        </div>
+    </div>
+
+    <!-- SLIDE 6: CONVITE À PARCERIA -->
+    <div class="slide">
+        <h2>🤝 VAMOS FAZER HISTÓRIA JUNTOS</h2>
+        
+        <div class="partnership-flow">
+            <div class="partner-box">
+                <h3>🏢 INFOWAY CONTRIBUI:</h3>
+                <ul style="text-align: left; margin-top: 20px; line-height: 1.8;">
+                    <li>✨ Plataforma tecnológica excepcional</li>
+                    <li>👥 Base de milhares de alunos qualificados</li>
+                    <li>🏆 Credibilidade e autoridade no mercado</li>
+                    <li>📢 Estrutura de marketing consolidada</li>
+                    <li>🎯 Visão de impacto e transformação</li>
+                </ul>
+            </div>
+            
+            <div class="plus-sign">+</div>
+            
+            <div class="partner-box">
+                <h3>⚡ NOSSA CONTRIBUIÇÃO:</h3>
+                <ul style="text-align: left; margin-top: 20px; line-height: 1.8;">
+                    <li>🧠 Metodologia científica revolucionária</li>
+                    <li>👨‍🏫 Autoridade especializada comprovada</li>
+                    <li>🎤 Mentoria personalizada exclusiva</li>
+                    <li>💡 Inovação constante em conteúdo</li>
+                    <li>❤️ Paixão por transformar vidas</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="hero-text">
+            <span class="highlight">
